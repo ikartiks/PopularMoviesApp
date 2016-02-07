@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="stdMarginForFirstAndLastView">16dp</dimen>
+    <dimen name="stdMarginLeftRight">16dp</dimen>
+    <dimen name="stdMarginTopBottom">16dp</dimen>
+    <dimen name="stdPaddingForButtonsText">5dp</dimen>
+    <dimen name="stdPaddingForCards">3dp</dimen>
+    <dimen name="stdElevationForCards">5dp</dimen>
+
+    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="divider_height">2dp</dimen>
+    <dimen name="small_text_size_navigation">20dp</dimen>
+    <dimen name="large_text_size_navigation">25dp</dimen>
+    <dimen name="text_size_body_header">20dp</dimen>
+    <dimen name="text_size_body_large">18dp</dimen>
+    <dimen name="text_size_body_name_meaning_description">14dp</dimen>
+    <dimen name="text_size_v_small">12dp</dimen>
+</resources>

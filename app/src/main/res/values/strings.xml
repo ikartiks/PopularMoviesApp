@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PopularMoviesApp</string>
+    <string name="movie_list">Movie listing</string>
+    <string name="noNet">Connect to the internet</string>
+    <string name="title_movie_detail">Movie Detail</string>
+
+    <string name="sortByPopularity">sort by popularity</string>
+    <string name="sortByRating">sort by rating</string>
+</resources>

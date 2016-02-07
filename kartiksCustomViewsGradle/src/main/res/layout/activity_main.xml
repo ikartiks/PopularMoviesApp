@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:kartiks="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- xmlns:kartiks= namespace shouldnt have caps n res auto -->
+
+    <com.kartiks.ui.CustomTextView
+        android:id="@+id/gifImageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        kartiks:ttfResourseName="s.ttf"
+        android:text="Dr.TatooOff"
+        android:textColor="#000000"
+        android:textSize="40dp" />
+    
+    <com.kartiks.ui.CustomTextView
+        android:id="@+id/gifImageVie2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dr.TatooOff"
+        android:textColor="#000000"
+        android:textSize="40dp" />
+
+
+<!--
+    <com.kartiks.ui.SliderView
+        android:id="@+id/SliderView1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+-->
+</LinearLayout>

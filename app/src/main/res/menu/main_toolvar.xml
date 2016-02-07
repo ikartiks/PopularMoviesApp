@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.material.materialdesign.MainActivity" >
+
+    
+    <item
+        android:id="@+id/Popularity"
+        android:title="@string/sortByPopularity"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/Rating"
+        android:title="@string/sortByRating"
+        app:showAsAction="never"/>
+
+</menu>

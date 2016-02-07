@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+   <declare-styleable name="CustomTextView">
+       <attr name="ttfResourseName" format="string" />
+       <!-- <attr name="bg" format="string" /> -->
+   </declare-styleable>
+   
+   
+   
+   <declare-styleable name="GifImageView">
+       <attr name="gifResourseId" format="string" />
+   </declare-styleable>
+    
+</resources>
