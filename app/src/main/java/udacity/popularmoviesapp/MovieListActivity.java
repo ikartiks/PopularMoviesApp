@@ -2,6 +2,8 @@ package udacity.popularmoviesapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -14,10 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.kartiks.utility.LoggerGeneral;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +28,11 @@ import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import udacity.popularmoviesapp.persistance.DBHelper;
 import udacity.popularmoviesapp.pojos.MovieWrapper;
 import udacity.popularmoviesapp.utility.ApiCalls;
 import udacity.popularmoviesapp.utility.Constants;
+import udacity.popularmoviesapp.utility.FileUtil;
 
 /**
  * An activity representing a list of Movies. This activity
@@ -41,6 +45,7 @@ import udacity.popularmoviesapp.utility.Constants;
 public class MovieListActivity extends ActivityBase {
 
     Context context=this;
+    Resources resources;
 
     List<MovieWrapper.Movie> movieList;
     SimpleItemRecyclerViewAdapter simpleItemRecyclerViewAdapter;
@@ -48,6 +53,8 @@ public class MovieListActivity extends ActivityBase {
 
     public static final String sortByPopularity="popularity.desc";
     public static final String sortByRating="vote_average.desc";
+
+    FileUtil fileUtil;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -65,12 +72,19 @@ public class MovieListActivity extends ActivityBase {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+
+        movieList.clear();
         if(item.getItemId()==R.id.Popularity){
             sortBy=sortByPopularity;
-        }else{
+            callService(sortBy);
+        }else if (item.getItemId()==R.id.Rating){
             sortBy=sortByRating;
+            callService(sortBy);
+        }else if (item.getItemId()==R.id.Favourite){
+            sortBy=resources.getString(R.string.listFavourites);
+            showFavourites();
         }
-        callService(sortBy);
+
         return true;
     }
 
@@ -82,6 +96,10 @@ public class MovieListActivity extends ActivityBase {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
+
+        resources=getResources();
+
+        fileUtil=new FileUtil(context);
 
         sortBy=sortByPopularity;
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -96,7 +114,7 @@ public class MovieListActivity extends ActivityBase {
         fab.setVisibility(View.INVISIBLE);
 
         movieList=new ArrayList<MovieWrapper.Movie>();
-        RecyclerView recyclerView =(RecyclerView) findViewById(R.id.movie_list);
+        RecyclerView recyclerView =(RecyclerView) findViewById(R.id.MovieList);
         assert recyclerView != null;
         setupRecyclerView(recyclerView);
 
@@ -120,6 +138,9 @@ public class MovieListActivity extends ActivityBase {
     @Override
     protected void onResume() {
         super.onResume();
+        if(sortBy.equals(resources.getString(R.string.listFavourites))){
+            showFavourites();
+        }else
         if(movieList.size()==0)
             callService(sortBy);
 
@@ -151,7 +172,22 @@ public class MovieListActivity extends ActivityBase {
             });
 
         }else
-            showCustomMessage(getResources().getString(R.string.app_name));
+            showCustomMessage(getResources().getString(R.string.noNet));
+    }
+
+    private void showFavourites(){
+
+        movieList.clear();
+        DBHelper dbHelper=DBHelper.getInstance(context);
+        Object result=dbHelper.genericRead(MovieWrapper.Movie.class, DBHelper.moviesTable, null, null, null, null, null);
+        if (result == null) {
+            showCustomMessage("No movies favourited");
+        }else if (result instanceof MovieWrapper.Movie){
+            movieList.add((MovieWrapper.Movie)result);
+        }else{
+            movieList.addAll((List<MovieWrapper.Movie>)result);
+        }
+        simpleItemRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     //    SimpleItemRecyclerViewAdapter starts
@@ -174,9 +210,35 @@ public class MovieListActivity extends ActivityBase {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = movieList.get(position);
-            holder.title.setText(holder.mItem.getTitle());
+            //holder.title.setText(holder.mItem.getTitle());
             //holder.mContentView.setText(movieList.get(position).content);
-            Picasso.with(context).load(Constants.imageBaseUrl+holder.mItem.getPosterPath()).into(holder.image);
+
+            if(holder.mItem.getPosterPath()!=null){
+                Picasso.with(context)
+                        .load(Constants.imageBaseUrl + holder.mItem.getPosterPath())
+                        .transform(new Transformation() {
+                            @Override
+                            public Bitmap transform(Bitmap source) {
+
+                                int noOfImages = resources.getInteger(R.integer.noOfImages);
+                                int containerWidth;
+                                if (noOfImages == 2)
+                                    containerWidth = screenWidth;
+                                else {
+                                    containerWidth = findViewById(R.id.MovieList).getWidth();
+                                }
+
+                                return fileUtil.transformImage(source, containerWidth, screenHeight,noOfImages);
+                            }
+
+                            @Override
+                            public String key() {
+                                return holder.mItem.getPosterPath();
+                            }
+                        })
+                        .into(holder.getImage());
+            }
+
             //holder.mView.setTag(holder.mItem);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -184,17 +246,44 @@ public class MovieListActivity extends ActivityBase {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        //arguments.putLong(MovieDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
-                        arguments.putParcelable(MovieDetailFragment.ARG_ITEM_ID,holder.mItem);
-                        MovieDetailFragment fragment = new MovieDetailFragment();
+
+                        // In case u want to use nested scroll view
+//                        arguments.putParcelable(MovieDetailFragment.ARG_ITEM_ID,holder.mItem);
+//                        MovieDetailFragment fragment = new MovieDetailFragment();
+//                        fragment.setArguments(arguments);
+//                        getFragmentManager().beginTransaction()
+//                                .replace(R.id.movie_detail_container, fragment)
+//                                .commit();
+
+
+
+
+                        //initially we used to do an add insted of replace
+
+                        arguments.putParcelable(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
+                        MovieDetailFragmentUsingRecyler fragment = new MovieDetailFragmentUsingRecyler();
                         fragment.setArguments(arguments);
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.movie_detail_container, fragment)
+
                                 .commit();
+
+                        getSupportActionBar().setTitle(holder.mItem.getTitle());
+
+
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, MovieDetailActivity.class);
-                        //intent.putExtra(MovieDetailFragment.ARG_ITEM_ID, holder.mItem.getId());
+
+                        // In case u want to use nested scroll view
+//                        Intent intent = new Intent(context, MovieDetailActivity.class);
+//                        Bundle mBundle = new Bundle();
+//                        mBundle.putParcelable(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
+//
+//                        intent.putExtra(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
+//                        context.startActivity(intent);
+
+                        //for recyler view
+                        Intent intent = new Intent(context, ActivityMovieDetailUsingRecyler.class);
                         Bundle mBundle = new Bundle();
                         mBundle.putParcelable(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
 
@@ -212,21 +301,29 @@ public class MovieListActivity extends ActivityBase {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView title;
+            //public final TextView title;
             public final ImageView image;
             public MovieWrapper.Movie mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                title = (TextView) view.findViewById(R.id.Title);
-                image = (ImageView) view.findViewById(R.id.Image);
+                //title = (TextView) view.findViewById(R.id.Title);
+                image = (ImageView) view.findViewById(R.id.MovieImage);
             }
 
-            @Override
-            public String toString() {
-                return super.toString() + " '" + title.getText() + "'";
+            public ImageView getImage() {
+                return image;
             }
+
+            public MovieWrapper.Movie getmItem() {
+                return mItem;
+            }
+
+            //            @Override
+//            public String toString() {
+//                return super.toString() + " '" + title.getText() + "'";
+//            }
         }
     }
 //    SimpleItemRecyclerViewAdapter ends

@@ -37,7 +37,7 @@ public class MovieDetailActivity extends ActivityBase {
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            //actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         // savedInstanceState is non-null when there is fragment state
@@ -74,8 +74,10 @@ public class MovieDetailActivity extends ActivityBase {
             // more details, see the Navigation pattern on Android Design:
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
+
+            //below opens new activity
             NavUtils.navigateUpTo(this, new Intent(this, MovieListActivity.class));
+
             return true;
         }
         return super.onOptionsItemSelected(item);

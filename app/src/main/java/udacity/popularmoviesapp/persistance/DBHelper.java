@@ -27,30 +27,22 @@ public class DBHelper extends DBHelperBase {
     }
 
     //reasons table
-    public static final String reasonsTable = "reasonsTable";
-    public static final String reasonName = "name";
+    public static final String moviesTable = "movie";
+    public static final String title = "title";
+    public static final String  id ="id";
+    public static final String overview="overview";
+    public static final String posterPath="posterPath";
+    public static final String releaseDate="releaseDate";
+    public static final String voteAverage="voteAverage";
+    public static final String isFavurite="favurite";
 
-    public static final String createreasons = "create table " + reasonsTable + " ( "+ reasonName + " text);";
+    public static final String createMovies = "create table " + moviesTable + " ( "+ id + " int, "+title+" text, "+overview+" text," +
+              posterPath+" text, "+releaseDate+" text, "+voteAverage+" text, "+isFavurite+" text);";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL(createreasons);
-        
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Colour')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Comparison With Compititors')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Confused')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Demand For More Products')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Durability')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Just Inquiry')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Need Time To Think')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Price')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Quality')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Size')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Urgency')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Want To Meet Owner')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Weight')");
-        db.execSQL("insert into "+reasonsTable+" ("+reasonName+") VALUES ('Will Come Back')");
+        db.execSQL(createMovies);
 
     }
 

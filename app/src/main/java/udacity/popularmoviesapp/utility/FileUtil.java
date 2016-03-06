@@ -314,6 +314,8 @@ public class FileUtil {
         return targetBitmap;
     }
 
+
+
     public void saveBitmapToFile(Bitmap image, File f) {
 
         // ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -372,6 +374,28 @@ public class FileUtil {
             e1.printStackTrace();
         }
         return bm;
+    }
+
+    public Bitmap transformImage(Bitmap source,int containerWidth,int screenHeight,int noOfPieces){
+
+
+        int width = source.getWidth();
+        int height = source.getHeight();
+
+        int newWidth=containerWidth/noOfPieces;
+        int newHeight=(height*newWidth)/width;
+
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+        // recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(source, 0, 0, width, height, matrix, false);
+        source.recycle();
+        return  resizedBitmap;
     }
 
 }

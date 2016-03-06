@@ -4,34 +4,36 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="@dimen/stdPaddingForButtonsText"
-    android:background="@drawable/movie_background"
     >
+    <!--android:background="@drawable/movie_background"-->
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:layout_centerInParent="true"
-        android:background="#c8e7c14d"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/stdPaddingForButtonsText"
-        />
+    <!--android:layout_margin="@dimen/stdPaddingForButtonsText"-->
+    <!--<TextView-->
+        <!--android:id="@+id/Title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?attr/textAppearanceListItem"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="#c8e7c14d"-->
+        <!--android:singleLine="true"-->
+        <!--android:ellipsize="end"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:layout_marginBottom="@dimen/stdPaddingForButtonsText"-->
+        <!--/>-->
 
     <ImageView
-        android:id="@+id/Image"
+        android:id="@+id/MovieImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/stdPaddingForButtonsText"
+        android:background="@color/lightColorPrimary"
         />
 
-
+    <!--
+    android:layout_marginLeft="@dimen/stdPaddingForButtonsText"
+    android:layout_margin="@dimen/stdPaddingForButtonsText"-->
 
 
 </LinearLayout>

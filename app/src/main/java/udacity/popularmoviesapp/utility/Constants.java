@@ -19,9 +19,7 @@ public class Constants {
 
     public static final String baseUrl="http://api.themoviedb.org/3/";
     public static final String apiKey="8b5b7707072ff65312e97b55ca01cbdf";
-    public static final String imageBaseUrl="http://image.tmdb.org/t/p/w342/";
-
-
+    public static final String imageBaseUrl="http://image.tmdb.org/t/p/w185/";
 
 
     public static ApiCalls getRetrofitInstance(){
@@ -39,6 +37,8 @@ public class Constants {
                 })
 
                 .create();
+
+
 
 
         Retrofit retrofit= new Retrofit.Builder()

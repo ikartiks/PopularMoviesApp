@@ -7,12 +7,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -39,7 +41,8 @@ public abstract class ActivityBase extends AppCompatActivity {
     //PS somehow getting resources as instance variable is creating memory issues,and app to crash
     AlertDialog ad;
     BaseDialog baseDialog;
-    int statusBarHeight,navigationBarHeight;
+
+    int screenWidth,screenHeight,statusBarHeight,navigationBarHeight;
 
     int RC_SIGN_IN =1;
     int REQUEST_READ_CONTACTS =2;
@@ -64,16 +67,23 @@ public abstract class ActivityBase extends AppCompatActivity {
             navigationBarHeight=0;
         }
 
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
+        screenHeight = size.y;
 
     }
 
     public void showLoader(){
         GifImageView gif=(GifImageView) findViewById(R.id.Loading);
-        gif.setVisibility(View.VISIBLE);
+        if(gif!=null)
+            gif.setVisibility(View.VISIBLE);
     }
     public void hideLoader(){
         GifImageView gif=(GifImageView) findViewById(R.id.Loading);
-        gif.setVisibility(View.GONE);
+        if(gif!=null)
+            gif.setVisibility(View.GONE);
     }
 
     public boolean isConnected() {

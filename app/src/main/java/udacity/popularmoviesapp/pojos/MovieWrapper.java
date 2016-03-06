@@ -49,7 +49,11 @@ public class MovieWrapper {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class Movie implements Parcelable{
+    public static class Movie implements Parcelable {
+
+        public Movie() {
+            this.favurite=false;
+        }
 
         protected Long id;
         protected String title;
@@ -62,6 +66,17 @@ public class MovieWrapper {
 
         @SerializedName("vote_average")
         String voteAverage;
+
+
+        boolean favurite;
+
+        public boolean isFavurite() {
+            return favurite;
+        }
+
+        public void setFavurite(boolean favurite) {
+            this.favurite = favurite;
+        }
 
         public Long getId() {
             return id;
@@ -139,7 +154,6 @@ public class MovieWrapper {
             dest.writeString(posterPath);
             dest.writeString(voteAverage);
             dest.writeString(releaseDate);
-
 
         }
 

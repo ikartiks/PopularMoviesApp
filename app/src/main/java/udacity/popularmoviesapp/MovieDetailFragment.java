@@ -39,6 +39,8 @@ public class MovieDetailFragment extends FragmentBase {
     public MovieDetailFragment() {
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +78,15 @@ public class MovieDetailFragment extends FragmentBase {
             ((TextView) rootView.findViewById(R.id.movie_detail)).setText(mItem.getOverview());
             ((TextView) rootView.findViewById(R.id.Average)).setText(mItem.getVoteAverage()+" / 10");
             ((TextView) rootView.findViewById(R.id.ReleaseDate)).setText(mItem.getReleaseDate());
+
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
     }
 }

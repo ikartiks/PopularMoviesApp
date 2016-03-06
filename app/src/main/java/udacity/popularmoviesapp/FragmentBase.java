@@ -20,8 +20,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.kartiks.ui.GifImageView;
+import com.kartiks.utility.LoggerGeneral;
 
+import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
+
+import retrofit.Response;
 
 
 /**
@@ -58,11 +66,13 @@ public abstract class FragmentBase extends Fragment  {
 
     public void showLoader(){
         GifImageView gif=(GifImageView) getActivity().findViewById(R.id.Loading);
-        gif.setVisibility(View.VISIBLE);
+        if(gif!=null)
+            gif.setVisibility(View.VISIBLE);
     }
     public void hideLoader(){
         GifImageView gif=(GifImageView) getActivity().findViewById(R.id.Loading);
-        gif.setVisibility(View.GONE);
+        if(gif!=null)
+            gif.setVisibility(View.GONE);
     }
 
     public boolean isConnected() {
@@ -162,6 +172,23 @@ public abstract class FragmentBase extends Fragment  {
         });
         ad = adb.create();
         ad.show();
+    }
+
+    public void handleFailure(Response response){
+
+        try {
+            String error= IOUtils.toString(response.errorBody().byteStream());
+            try {
+                JSONObject vString=new JSONObject(error);
+                showToast(vString.getString("value"));
+
+            } catch (JSONException e) {
+                LoggerGeneral.e("failed :: " + error);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
