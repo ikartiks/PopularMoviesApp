@@ -1,0 +1,15 @@
+<android.support.v7.widget.RecyclerView
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/MovieTrailerReviews"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+app:layoutManager="LinearLayoutManager"
+
+    />
+
+    <!--
+    layout behaviour can come here if we are not using
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
