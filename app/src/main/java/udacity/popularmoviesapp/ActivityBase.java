@@ -90,7 +90,7 @@ public abstract class ActivityBase extends AppCompatActivity {
 
         ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null || activeNetworkInfo.getType()==ConnectivityManager.TYPE_WIFI)
+        if (activeNetworkInfo != null)
             return activeNetworkInfo.isConnected();
         else
             return false;

@@ -79,7 +79,7 @@ public abstract class FragmentBase extends Fragment  {
 
         ConnectivityManager connectivityManager = (ConnectivityManager)this.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null || activeNetworkInfo.getType()== ConnectivityManager.TYPE_WIFI)
+        if (activeNetworkInfo != null)
             return activeNetworkInfo.isConnected();
         else
             return false;
