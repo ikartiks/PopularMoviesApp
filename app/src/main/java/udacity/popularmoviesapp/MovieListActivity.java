@@ -132,7 +132,6 @@ public class MovieListActivity extends ActivityBase {
         recyclerView.setHasFixedSize(true);
         simpleItemRecyclerViewAdapter=new SimpleItemRecyclerViewAdapter();
         recyclerView.setAdapter(simpleItemRecyclerViewAdapter);
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package udacity.popularmoviesapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -65,14 +66,21 @@ public abstract class FragmentBase extends Fragment  {
     }
 
     public void showLoader(){
-        GifImageView gif=(GifImageView) getActivity().findViewById(R.id.Loading);
-        if(gif!=null)
-            gif.setVisibility(View.VISIBLE);
+        Activity a=getActivity();
+        if(a!=null){
+            GifImageView gif=(GifImageView) a.findViewById(R.id.Loading);
+            if(gif!=null)
+                gif.setVisibility(View.VISIBLE);
+        }
+
     }
     public void hideLoader(){
-        GifImageView gif=(GifImageView) getActivity().findViewById(R.id.Loading);
-        if(gif!=null)
-            gif.setVisibility(View.GONE);
+        Activity a=getActivity();
+        if(a!=null){
+            GifImageView gif=(GifImageView) a.findViewById(R.id.Loading);
+            if(gif!=null)
+                gif.setVisibility(View.GONE);
+        }
     }
 
     public boolean isConnected() {
