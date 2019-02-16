@@ -54,8 +54,8 @@ public class MovieDetailActivity extends ActivityBase {
             // using a fragment transaction.
             Bundle arguments = new Bundle();
 
-            arguments.putParcelable(MovieDetailFragment.ARG_ITEM_ID,
-                    getIntent().getParcelableExtra(MovieDetailFragment.ARG_ITEM_ID));
+            arguments.putParcelable(MovieDetailFragmentUsingRecyler.ARG_ITEM_ID,
+                    getIntent().getParcelableExtra(MovieDetailFragmentUsingRecyler.ARG_ITEM_ID));
             MovieDetailFragment fragment = new MovieDetailFragment();
             fragment.setArguments(arguments);
             getFragmentManager().beginTransaction()

@@ -66,7 +66,7 @@ public class MovieDetailFragmentUsingRecyler extends FragmentBase {
             mItem = getArguments().getParcelable(ARG_ITEM_ID);
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout =  activity.findViewById(R.id.toolbar_layout);
             //Toolbar toolbar=(Toolbar)activity.findViewById(R.id.detail_toolbar);
             //toolbar.setPadding(0, statusBarHeight, 0, 0);
             if (appBarLayout != null) {

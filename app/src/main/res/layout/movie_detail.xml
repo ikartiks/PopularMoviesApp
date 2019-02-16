@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Ddddd"
+            android:text="Release date"
             android:textIsSelectable="true"
             android:layout_weight="1"
             />
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="asdasdasda"
+            android:text="rating"
             android:textIsSelectable="true"
             android:layout_weight="1"
             />
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:text="asdasdasda"
+        android:text="Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail Movie detail"
         android:textIsSelectable="true"
         />
 

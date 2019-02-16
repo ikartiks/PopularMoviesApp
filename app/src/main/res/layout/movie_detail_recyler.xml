@@ -1,13 +1,12 @@
 <android.support.v7.widget.RecyclerView
-
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:id="@+id/MovieTrailerReviews"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-app:layoutManager="LinearLayoutManager"
-
-    />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/MovieTrailerReviews"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutManager="LinearLayoutManager"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:listitem="@layout/inflate_trailer"/>
 
     <!--
     layout behaviour can come here if we are not using

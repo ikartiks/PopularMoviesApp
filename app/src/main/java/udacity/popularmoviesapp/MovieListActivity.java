@@ -93,7 +93,7 @@ public class MovieListActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
@@ -102,7 +102,7 @@ public class MovieListActivity extends ActivityBase {
         fileUtil=new FileUtil(context);
 
         sortBy=sortByPopularity;
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -259,7 +259,7 @@ public class MovieListActivity extends ActivityBase {
 
                         //initially we used to do an add insted of replace
 
-                        arguments.putParcelable(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
+                        arguments.putParcelable(MovieDetailFragmentUsingRecyler.ARG_ITEM_ID, holder.mItem);
                         MovieDetailFragmentUsingRecyler fragment = new MovieDetailFragmentUsingRecyler();
                         fragment.setArguments(arguments);
                         getFragmentManager().beginTransaction()
@@ -284,9 +284,9 @@ public class MovieListActivity extends ActivityBase {
                         //for recyler view
                         Intent intent = new Intent(context, ActivityMovieDetailUsingRecyler.class);
                         Bundle mBundle = new Bundle();
-                        mBundle.putParcelable(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
+                        mBundle.putParcelable(MovieDetailFragmentUsingRecyler.ARG_ITEM_ID, holder.mItem);
 
-                        intent.putExtra(MovieDetailFragment.ARG_ITEM_ID, holder.mItem);
+                        intent.putExtra(MovieDetailFragmentUsingRecyler.ARG_ITEM_ID, holder.mItem);
                         context.startActivity(intent);
                     }
                 }
